@@ -48,21 +48,11 @@ class Diverse(commands.Cog):
         description="Changes the NPSSO token to a new one."
     )
     @commands.is_owner()
-    async def refresh_token(self, ctx: discord.ApplicationContext):
-        self.bot.psnawp._request_builder.authenticator.obtain_fresh_access_token()
-        await ctx.respond("Sucessfully generated a new token!")
-        print("Generated a new NPPSO token.")
-
-    @commands.slash_command(
-        name="set-new-psn-token",
-        description="Changes the NPSSO token to a new one. provided by you"
-    )
-    @commands.is_owner()
     @discord.option(name="new_psn_api_token", description="new NPPSO cookie to replace old one with")
-async def set_new_npsso_token(self, ctx: discord.ApplicationContext, new_psn_api_token: str):
-    self.bot.psnawp = PSNAWP(new_psn_api_token)
-    await ctx.respond("Sucessfully set the NPPSO token!")
-    print("Sucessfully set the NPPSO token!")
+    async def refresh_token(self, ctx: discord.ApplicationContext, new_psn_api_token: str):
+        self.bot.psnawp = PSNAWP(new_psn_api_token)
+        await ctx.respond("Sucessfully set the NPPSO token!")
+        print("Sucessfully set the NPPSO token!")
 
 
 def setup(bot):
